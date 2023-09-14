@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfcusvlbbf0lv"]
+
+[ext_resource type="Script" path="res://EnhancedNavAgent3D/EnhancedNavAgent3D.gd" id="1_46sfp"]
+[ext_resource type="Script" path="res://Enemy.gd" id="1_tuy2h"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ivqvd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fdcho"]
+albedo_color = Color(1, 0.0588235, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ykd5w"]
+material = SubResource("StandardMaterial3D_fdcho")
+
+[node name="Enemy" type="CharacterBody3D"]
+script = ExtResource("1_tuy2h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_ivqvd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ykd5w")
+
+[node name="EnhancedNavAgent3D" type="NavigationAgent3D" parent="." node_paths=PackedStringArray("_char_body")]
+script = ExtResource("1_46sfp")
+_char_body = NodePath("..")
